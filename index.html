@@ -206,6 +206,8 @@ body::after {
   color: var(--c-ivory);
   flex-shrink: 0;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 .nav__brand em {
   font-style: normal;
@@ -216,7 +218,15 @@ body::after {
   background: var(--c-terra);
   border-radius: 50%;
   vertical-align: middle;
-  margin: 0 2px 1px;
+  margin: 0 4px 1px 2px;
+}
+.nav__brand-loc {
+  font-family: var(--f-sans);
+  font-size: 0.52rem;
+  letter-spacing: 0.32em;
+  color: var(--c-terra);
+  font-weight: 400;
+  margin-left: 0.2rem;
 }
 
 .nav__links {
@@ -342,27 +352,25 @@ body::after {
 }
 
 /* ================================================================
-   HERO
+   HERO — EDITORIAL COVER COMPOSITION
 ================================================================ */
 #hero {
   position: relative;
   width: 100%;
-  height: 100svh;
-  min-height: 620px;
+  min-height: 100svh;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
   background: var(--c-black);
+  padding: 96px var(--page-h) 3.5rem;
 }
 
 .hero__bg {
   position: absolute;
   inset: 0;
-  /*
-    Authentic La Taverna Lagos: Courtyard under vine pergola looking towards red building
-  */
   background: url('assets/la-taverna/hero/hero-courtyard.jpeg') center 35% / cover no-repeat;
-  filter: saturate(0.82) contrast(1.03) brightness(0.96);
+  filter: saturate(0.82) contrast(1.03) brightness(0.94);
   transform-origin: center center;
   will-change: transform;
   animation: hero-breathe 22s var(--ease-expo) forwards;
@@ -372,13 +380,48 @@ body::after {
   to   { transform: scale(1.00); }
 }
 
-/* Multi-layer cinematic gradient — preserves courtyard character while ensuring headline contrast */
 .hero__scrim {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(to top,  rgba(14,10,7,0.92) 0%, rgba(14,10,7,0.48) 45%, rgba(14,10,7,0.12) 70%, transparent 100%),
-    linear-gradient(to right, rgba(14,10,7,0.65) 0%, rgba(14,10,7,0.25) 45%, transparent 70%),
-    linear-gradient(to bottom, rgba(14,10,7,0.38) 0%, transparent 26%);
+    linear-gradient(to top, rgba(14,10,7,0.96) 0%, rgba(14,10,7,0.65) 45%, rgba(14,10,7,0.2) 75%, rgba(14,10,7,0.45) 100%),
+    linear-gradient(to right, rgba(14,10,7,0.72) 0%, rgba(14,10,7,0.25) 60%, transparent 100%);
+}
+
+.hero__masthead {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(242,232,217,0.18);
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: fade-rise 0.8s 0.3s var(--ease-soft) forwards;
+}
+
+.hero__masthead-left,
+.hero__masthead-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero__masthead-tag {
+  font-family: var(--f-sans);
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(242,232,217,0.7);
+}
+
+.hero__masthead-sep {
+  color: var(--c-terra);
+  font-size: 0.7rem;
 }
 
 .hero__content {
@@ -386,62 +429,96 @@ body::after {
   z-index: 2;
   width: 100%;
   max-width: 1500px;
-  margin: 0 auto;
-  padding: 0 var(--page-h) 7rem;
+  margin: auto auto 0;
+  padding: 3rem 0 0;
 }
 
-.hero__eyebrow {
+.hero__editorial-badge {
   font-family: var(--f-sans);
-  font-size: 0.6rem;
-  letter-spacing: 0.35em;
+  font-size: 0.55rem;
+  letter-spacing: 0.36em;
   text-transform: uppercase;
   color: var(--c-terra);
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.2rem;
   opacity: 0;
   transform: translateY(12px);
   animation: fade-rise 0.8s 0.5s var(--ease-soft) forwards;
 }
 
-.hero__headline {
-  font-family: var(--f-serif);
-  font-size: clamp(3.2rem, 8vw, 7.8rem);
-  font-weight: 300;
-  line-height: 1.02;
-  letter-spacing: -0.01em;
-  color: var(--c-ivory);
-  max-width: 13ch;
-  text-shadow: 0 2px 24px rgba(0,0,0,0.45);
+.hero__brand-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.4rem;
   opacity: 0;
   transform: translateY(20px);
-  animation: fade-rise 1s 0.75s var(--ease-soft) forwards;
+  animation: fade-rise 1s 0.7s var(--ease-soft) forwards;
 }
-.hero__headline em {
-  font-style: italic;
+
+.hero__brand-sub {
+  font-family: var(--f-serif);
+  font-size: clamp(3.2rem, 7.5vw, 6.8rem);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--c-ivory);
+  text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+}
+
+.hero__brand-origin {
+  font-family: var(--f-sans);
+  font-size: clamp(0.72rem, 1.4vw, 1.05rem);
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
   color: var(--c-ivory-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.2rem;
+}
+
+.hero__slash {
+  font-style: normal;
+  color: var(--c-terra);
+  font-weight: 300;
+}
+
+.hero__headline-lead {
+  font-family: var(--f-serif);
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.25;
+  color: rgba(242,232,217,0.92);
+  max-width: 24ch;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fade-rise 0.8s 0.9s var(--ease-soft) forwards;
 }
 
 .hero__sub {
-  margin-top: 1.6rem;
   font-family: var(--f-sans);
-  font-size: clamp(0.88rem, 1.35vw, 1.05rem);
+  font-size: clamp(0.85rem, 1.2vw, 0.98rem);
   font-weight: 300;
-  color: rgba(242,232,217,0.62);
+  color: rgba(242,232,217,0.65);
   max-width: 44ch;
-  line-height: 1.72;
+  line-height: 1.75;
   opacity: 0;
   transform: translateY(12px);
-  animation: fade-rise 0.8s 1.05s var(--ease-soft) forwards;
+  animation: fade-rise 0.8s 1.1s var(--ease-soft) forwards;
 }
 
 .hero__actions {
-  margin-top: 2.8rem;
+  margin-top: 2.2rem;
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
   opacity: 0;
   transform: translateY(10px);
-  animation: fade-rise 0.8s 1.28s var(--ease-soft) forwards;
+  animation: fade-rise 0.8s 1.3s var(--ease-soft) forwards;
 }
 
 @keyframes fade-rise {
@@ -706,6 +783,169 @@ body::after {
 }
 
 /* ================================================================
+   SIGNATURE MOMENT — THREE COUNTRIES. ONE TABLE. LAGOS.
+================================================================ */
+.origins {
+  background: #130d0a;
+  color: var(--c-ivory);
+  padding: 6.5rem var(--page-h);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(242,232,217,0.1);
+  border-bottom: 1px solid rgba(242,232,217,0.1);
+}
+
+.origins__bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--f-serif);
+  font-size: clamp(8rem, 20vw, 22rem);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: rgba(242,232,217,0.022);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.origins__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.origins__header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 4rem;
+}
+
+.origins__headline {
+  font-family: var(--f-serif);
+  font-size: clamp(2.3rem, 4.8vw, 4.4rem);
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--c-ivory);
+  margin-top: 0.8rem;
+  letter-spacing: -0.01em;
+}
+
+.origins__headline em {
+  font-style: italic;
+  color: var(--c-terra);
+}
+
+.origins__sub {
+  font-family: var(--f-sans);
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: rgba(242,232,217,0.6);
+  line-height: 1.75;
+  margin-top: 1.2rem;
+}
+
+.origins__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid rgba(242,232,217,0.12);
+  background: rgba(20, 14, 11, 0.6);
+}
+
+.origins__col {
+  padding: 3.5rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(242,232,217,0.12);
+  position: relative;
+  transition: background 0.4s var(--ease-soft);
+}
+
+.origins__col:last-child {
+  border-right: none;
+}
+
+.origins__col:hover {
+  background: rgba(168, 79, 50, 0.05);
+}
+
+.origins__col--featured {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.origins__col-num {
+  font-family: var(--f-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--c-terra);
+  margin-bottom: 1.2rem;
+}
+
+.origins__country {
+  font-family: var(--f-serif);
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--c-ivory);
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+.origins__dishes {
+  font-family: var(--f-sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242,232,217,0.5);
+  margin-bottom: 1.5rem;
+}
+
+.origins__rule {
+  width: 32px;
+  height: 1px;
+  background: var(--c-terra);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.origins__desc {
+  font-family: var(--f-sans);
+  font-size: 0.86rem;
+  font-weight: 300;
+  color: rgba(242,232,217,0.65);
+  line-height: 1.75;
+  margin-top: auto;
+}
+
+.origins__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+  margin-top: 3.5rem;
+}
+
+.origins__anchor-line {
+  height: 1px;
+  width: 60px;
+  background: rgba(242,232,217,0.15);
+}
+
+.origins__anchor-text {
+  font-family: var(--f-sans);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(242,232,217,0.38);
+}
+
+/* ================================================================
    SECTION 03 — FOOD GALLERY
    Asymmetric editorial grid
 ================================================================ */
@@ -856,6 +1096,15 @@ body::after {
   transition: transform 0.7s var(--ease-soft);
 }
 .sig__item:hover .sig__img img { transform: scale(1.06); }
+
+.sig__num {
+  font-family: var(--f-sans);
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  color: var(--c-terra);
+  margin-bottom: 0.6rem;
+  display: block;
+}
 
 .sig__cat {
   font-family: var(--f-sans);
@@ -1067,6 +1316,14 @@ body::after {
   line-height: 1.04;
   color: var(--c-ivory);
   max-width: 16ch;
+}
+.spaces__geo {
+  font-family: var(--f-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(242,232,217,0.45);
+  margin-top: 1rem;
 }
 
 .spaces__panels {
@@ -1738,7 +1995,12 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
   .nav__hamburger { display: flex; }
 
   /* Hero */
-  .hero__headline { font-size: clamp(2.8rem, 12vw, 5rem); }
+  #hero { padding: 90px var(--page-h) 2.8rem; justify-content: flex-end; }
+  .hero__masthead { display: none; }
+  .hero__brand-sub { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+  .hero__brand-origin { font-size: 0.68rem; letter-spacing: 0.28em; flex-wrap: wrap; }
+  .hero__headline-lead { font-size: 1.35rem; max-width: 100%; }
+  .hero__sub { font-size: 0.86rem; }
   .hero__scroll { display: none; }
 
   /* Intro */
@@ -1774,6 +2036,15 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
   .story__img { height: 420px; }
   .story__img img { height: 100%; }
   .story__text { padding: var(--section-v) var(--page-h); }
+
+  /* Origins */
+  .origins { padding: 4.5rem var(--page-h); }
+  .origins__grid { grid-template-columns: 1fr; border: 1px solid rgba(242,232,217,0.12); }
+  .origins__col { border-right: none; border-bottom: 1px solid rgba(242,232,217,0.12); padding: 2.5rem 1.8rem; }
+  .origins__col:last-child { border-bottom: none; }
+  .origins__header { margin-bottom: 2.8rem; }
+  .origins__footer { flex-direction: column; gap: 0.8rem; text-align: center; margin-top: 2.5rem; }
+  .origins__anchor-line { width: 40px; }
 
   /* Food */
   .food__header { grid-template-columns: 1fr; }
@@ -1840,9 +2111,12 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
 @media (max-width: 430px) {
   :root { --section-v: 4.5rem; }
 
-  .hero__headline { max-width: none; }
   .hero__actions { flex-direction: column; align-items: flex-start; }
   .hero__actions .btn { width: 100%; justify-content: center; }
+
+  .origins__col { padding: 2.2rem 1.4rem; }
+  .origins__country { font-size: 1.8rem; }
+  .origins__anchor-text { font-size: 0.56rem; letter-spacing: 0.2em; }
 
   .sig__row { grid-template-columns: 1fr; }
   .sig__item { border-right: none !important; }
@@ -1866,7 +2140,7 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
      NAV
 ============================================================ -->
 <nav id="site-nav" role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav__brand" aria-label="La Taverna Lagos">LA TAVERNA</a>
+  <a href="#" class="nav__brand" aria-label="La Taverna Lagos">LA TAVERNA<em></em><span class="nav__brand-loc">LAGOS</span></a>
 
   <ul class="nav__links">
     <li><a href="#food">Menu</a></li>
@@ -1900,30 +2174,46 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
 </div>
 
 <!-- ============================================================
-     HERO
+     HERO — EDITORIAL RESTAURANT COVER
 ============================================================ -->
-<section id="hero" aria-label="La Taverna Lagos — hero">
-  <!--
-    Authentic La Taverna Lagos Courtyard Photography
-    Source: Verified restaurant listing & review archives
-  -->
+<section id="hero" aria-label="La Taverna Lagos — Culinary Journal">
   <div class="hero__bg" role="img" aria-label="La Taverna outdoor dining terrace and garden courtyard"></div>
   <div class="hero__scrim" aria-hidden="true"></div>
 
-  <div class="hero__content">
-    <p class="hero__eyebrow">La Taverna &nbsp;·&nbsp; Victoria Island</p>
+  <!-- Editorial Top Masthead Bar -->
+  <div class="hero__masthead">
+    <div class="hero__masthead-left">
+      <span class="hero__masthead-tag">EST. 2013</span>
+      <span class="hero__masthead-sep">&middot;</span>
+      <span class="hero__masthead-tag">VICTORIA ISLAND, LAGOS</span>
+    </div>
+    <div class="hero__masthead-right">
+      <span class="hero__masthead-tag">48 BALARABE MUSA CRESCENT</span>
+    </div>
+  </div>
 
-    <h1 class="hero__headline">
-      A taste of <em>Spain,</em><br>
-      Italy &amp; Chile<br>
-      in the heart<br>
-      of Lagos.
+  <div class="hero__content">
+    <div class="hero__editorial-badge">
+      <span class="hero__badge-label">CULINARY JOURNAL &middot; ISSUE 2026</span>
+    </div>
+
+    <!-- Editorial Masthead Branding -->
+    <h1 class="hero__brand-display">
+      <span class="hero__brand-sub">LA TAVERNA</span>
+      <span class="hero__brand-origin">SPAIN <em class="hero__slash">/</em> ITALY <em class="hero__slash">/</em> CHILE</span>
     </h1>
 
+    <!-- Headline Statement -->
+    <p class="hero__headline-lead">
+      A taste of the Mediterranean &amp; South America in the heart of Lagos.
+    </p>
+
+    <!-- Supporting sentence -->
     <p class="hero__sub">
       Wood-fired pizza, authentic paella and Chilean plates in a leafy Victoria Island courtyard.
     </p>
 
+    <!-- Actions -->
     <div class="hero__actions">
       <a href="tel:+2349042664096" class="btn btn--fill">Reserve a Table</a>
       <a href="#intro" class="btn btn--outline">Explore the Experience</a>
@@ -1972,7 +2262,7 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
         />
       </div>
       <div class="intro__est js-reveal d3">
-        <span>Est.</span>
+        <span>EST. 2013 &middot; LAGOS</span>
         <strong>2013</strong>
       </div>
     </div>
@@ -2022,6 +2312,66 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
       </p>
     </div>
 
+  </div>
+</section>
+
+<!-- ============================================================
+     SIGNATURE MOMENT — THREE COUNTRIES. ONE TABLE. LAGOS.
+============================================================ -->
+<section id="origins" class="origins" aria-labelledby="origins-h">
+  <div class="origins__bg-text" aria-hidden="true">LAGOS</div>
+
+  <div class="origins__inner">
+    <div class="origins__header js-reveal">
+      <span class="u-label" style="color:var(--c-terra);">The Culinary Trilogy</span>
+      <h2 id="origins-h" class="origins__headline">
+        Three Countries. <em>One Table.</em> Lagos.
+      </h2>
+      <p class="origins__sub">
+        A distinct culinary trilogy curated by Chef Cristian Duhalde Diaz, rooted in Mediterranean and South American traditions and brought alive in Victoria Island.
+      </p>
+    </div>
+
+    <div class="origins__grid">
+      <!-- 01 ESPAÑA -->
+      <div class="origins__col js-reveal d1">
+        <div class="origins__col-num">01 / IBERIAN HERITAGE</div>
+        <h3 class="origins__country">ESPAÑA</h3>
+        <p class="origins__dishes">Tapas &middot; Paella &middot; Sangria</p>
+        <span class="origins__rule"></span>
+        <p class="origins__desc">
+          Iberian sharing plates, crisp plantain empanadas, saffron rice in wide pans and the ease of long afternoon gatherings.
+        </p>
+      </div>
+
+      <!-- 02 ITALIA -->
+      <div class="origins__col origins__col--featured js-reveal d2">
+        <div class="origins__col-num">02 / ITALIAN CRAFT</div>
+        <h3 class="origins__country">ITALIA</h3>
+        <p class="origins__dishes">Pizza &middot; Pasta &middot; Wine</p>
+        <span class="origins__rule"></span>
+        <p class="origins__desc">
+          Handcrafted fettuccine rolled daily, stone-baked pizzas with blistered crusts and cellar wines poured for the table.
+        </p>
+      </div>
+
+      <!-- 03 CHILE -->
+      <div class="origins__col js-reveal d3">
+        <div class="origins__col-num">03 / PACIFIC INFLUENCE</div>
+        <h3 class="origins__country">CHILE</h3>
+        <p class="origins__dishes">Seafood &middot; Coastal Flavours &middot; Reds</p>
+        <span class="origins__rule"></span>
+        <p class="origins__desc">
+          Pacific coast inspiration, fresh whole fish seasoned with house relishes, slow-braised meats and robust South American varietals.
+        </p>
+      </div>
+    </div>
+
+    <div class="origins__footer js-reveal d4">
+      <span class="origins__anchor-line"></span>
+      <span class="origins__anchor-text">Victoria Island &middot; 48 Balarabe Musa Crescent &middot; Lagos</span>
+      <span class="origins__anchor-line"></span>
+    </div>
   </div>
 </section>
 
@@ -2100,6 +2450,7 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
   <div class="sig__row">
     <!-- Pizza -->
     <div class="sig__item js-reveal">
+      <span class="sig__num">01</span>
       <div class="sig__img">
         <img
           src="assets/la-taverna/food/wood-fired-pizza.jpeg"
@@ -2114,6 +2465,7 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
 
     <!-- Tapas -->
     <div class="sig__item js-reveal d1">
+      <span class="sig__num">02</span>
       <div class="sig__img">
         <img
           src="assets/la-taverna/food/tapas-starter-platter.jpg"
@@ -2128,6 +2480,7 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
 
     <!-- Seafood -->
     <div class="sig__item js-reveal d2">
+      <span class="sig__num">03</span>
       <div class="sig__img">
         <img
           src="assets/la-taverna/food/grilled-red-snapper-seafood.jpg"
@@ -2142,6 +2495,7 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
 
     <!-- Paella -->
     <div class="sig__item js-reveal d3">
+      <span class="sig__num">04</span>
       <div class="sig__img">
         <img
           src="assets/la-taverna/food/seafood-paella-authentic.jpg"
@@ -2156,6 +2510,7 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
 
     <!-- Desserts -->
     <div class="sig__item js-reveal d4">
+      <span class="sig__num">05</span>
       <div class="sig__img">
         <img
           src="assets/la-taverna/food/chocolate-drizzle-dessert-pizza.jpg"
@@ -2250,6 +2605,7 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
       has its own<br>
       character.
     </h2>
+    <p class="spaces__geo js-reveal d2">VICTORIA ISLAND &middot; 6.4281&deg; N, 3.4219&deg; E &middot; LAGOS</p>
   </div>
 
   <div class="spaces__panels">
