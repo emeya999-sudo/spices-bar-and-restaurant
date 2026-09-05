@@ -883,6 +883,172 @@ body::after {
 }
 
 /* ================================================================
+   SECTION 04.5 — REVIEWS / SOCIAL PROOF
+================================================================ */
+#reviews {
+  background: var(--c-paper);
+  color: var(--c-espresso);
+  padding: var(--section-v) var(--page-h);
+  border-top: 1px solid var(--c-rule-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 3rem;
+  margin-bottom: 4.5rem;
+  flex-wrap: wrap;
+}
+
+.reviews__title-col {
+  max-width: 600px;
+}
+
+.reviews__headline {
+  font-family: var(--f-serif);
+  font-size: clamp(2.4rem, 4.5vw, 4.4rem);
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--c-espresso);
+  margin-top: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.reviews__sub {
+  font-family: var(--f-sans);
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: #6e6059;
+  line-height: 1.7;
+  max-width: 44ch;
+}
+
+.reviews__summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.4rem 2rem;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(44, 34, 26, 0.1);
+  border-left: 3px solid var(--c-terra);
+}
+
+.reviews__rating-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.reviews__score {
+  font-family: var(--f-serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--c-espresso);
+}
+
+.reviews__stars-top {
+  color: var(--c-terra);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+}
+
+.reviews__count {
+  font-family: var(--f-sans);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7a6d62;
+  margin-top: 0.4rem;
+}
+
+/* 3 review cards on desktop */
+.reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 4.5rem;
+}
+
+.reviews__card {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(44, 34, 26, 0.1);
+  padding: 2.5rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.4s var(--ease-soft), background 0.4s, border-color 0.4s;
+  position: relative;
+}
+
+.reviews__card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(168, 79, 50, 0.35);
+}
+
+.reviews__card-stars {
+  color: var(--c-terra);
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  margin-bottom: 1.4rem;
+}
+
+.reviews__card-quote {
+  font-family: var(--f-serif);
+  font-size: 1.16rem;
+  font-weight: 400;
+  line-height: 1.58;
+  color: var(--c-espresso);
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.reviews__card-author {
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(44, 34, 26, 0.1);
+}
+
+.reviews__author-name {
+  font-family: var(--f-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--c-espresso);
+  line-height: 1.2;
+}
+
+.reviews__author-meta {
+  font-family: var(--f-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a7d70;
+  margin-top: 0.3rem;
+}
+
+/* Bottom CTA under reviews */
+.reviews__cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.4rem;
+  padding-top: 0.5rem;
+}
+
+.reviews__cta-text {
+  font-family: var(--f-serif);
+  font-size: 1.45rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--c-espresso);
+}
+
+/* ================================================================
    SECTION 05 — SPACES
    Staggered full-bleed panels, each with unique height
 ================================================================ */
@@ -1552,6 +1718,10 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
 
   /* Social */
   .social__grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Reviews */
+  .reviews__grid { gap: 1.4rem; }
+  .reviews__card { padding: 2rem 1.6rem; }
 }
 
 /* ================================================================
@@ -1627,6 +1797,12 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
   .sig__item:nth-child(n+3) { border-top: 1px solid var(--c-rule-dark); padding-top: 2.2rem; }
   .sig__item:nth-child(5) { border-right: none; }
 
+  /* Reviews */
+  .reviews__header { flex-direction: column; align-items: flex-start; gap: 2rem; margin-bottom: 3rem; }
+  .reviews__summary { width: 100%; }
+  .reviews__grid { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  .reviews__card-quote { font-size: 1.12rem; }
+
   /* Spaces */
   .spaces__panels { grid-template-columns: 1fr; gap: 1.8rem; padding: 0 var(--page-h); }
   .space__panel { height: 380px !important; margin: 0 !important; }
@@ -1671,6 +1847,10 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
   .sig__row { grid-template-columns: 1fr; }
   .sig__item { border-right: none !important; }
   .sig__item:nth-child(n+2) { border-top: 1px solid var(--c-rule-dark); padding-top: 2rem; }
+
+  .reviews__card { padding: 1.8rem 1.4rem; }
+  .reviews__headline { font-size: clamp(2.2rem, 9vw, 3.2rem); }
+  .reviews__cta-wrap .btn { width: 100%; justify-content: center; }
 
   .social__grid { grid-template-columns: repeat(2, 1fr); }
   .social__post:nth-child(n+5) { display: none; }
@@ -1987,6 +2167,75 @@ a.footer__contact-item:hover { color: var(--c-ivory); }
       <h3 class="sig__name">Sweet End</h3>
       <p class="sig__desc">A reason to stay at the table just a little longer.</p>
     </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION — REVIEWS / SOCIAL PROOF
+============================================================ -->
+<section id="reviews" aria-labelledby="reviews-h">
+  <div class="reviews__header">
+    <div class="reviews__title-col">
+      <span class="u-label js-reveal" style="color:var(--c-terra);">What Our Guests Say</span>
+      <h2 id="reviews-h" class="reviews__headline js-reveal d1">
+        A table worth<br>
+        coming back to.
+      </h2>
+      <p class="reviews__sub js-reveal d2">
+        A few words from guests who have experienced La Taverna.
+      </p>
+    </div>
+
+    <div class="reviews__summary js-reveal d2">
+      <div class="reviews__rating-badge">
+        <span class="reviews__score">4.3</span>
+        <span class="reviews__stars-top" aria-hidden="true">★★★★☆</span>
+      </div>
+      <p class="reviews__count">2,269+ Google reviews</p>
+    </div>
+  </div>
+
+  <div class="reviews__grid">
+    <!-- Card 1 -->
+    <article class="reviews__card js-reveal" aria-label="Review by Farouk T.">
+      <div class="reviews__card-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="reviews__card-quote">
+        Lovely experience… serene atmosphere, great customer experience, good portions and plenty of nice photo spots.
+      </p>
+      <div class="reviews__card-author">
+        <p class="reviews__author-name">Farouk T.</p>
+        <p class="reviews__author-meta">Google Review &middot; Nov 2025</p>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="reviews__card js-reveal d1" aria-label="Review by Nkechi O.">
+      <div class="reviews__card-stars" aria-label="4 out of 5 stars">★★★★☆</div>
+      <p class="reviews__card-quote">
+        A nice blend of rustic and modern with lots of greenery. This restaurant is very calming.
+      </p>
+      <div class="reviews__card-author">
+        <p class="reviews__author-name">Nkechi O.</p>
+        <p class="reviews__author-meta">Google Review &middot; Nov 2025</p>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="reviews__card js-reveal d2" aria-label="Review by Roman S.">
+      <div class="reviews__card-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="reviews__card-quote">
+        A lovely place with a cozy Italian atmosphere and lots of greenery. The food and drinks are great.
+      </p>
+      <div class="reviews__card-author">
+        <p class="reviews__author-name">Roman S.</p>
+        <p class="reviews__author-meta">Google Review &middot; Oct 2025</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="reviews__cta-wrap js-reveal d3">
+    <p class="reviews__cta-text">Come see what the Taverna is about.</p>
+    <a href="tel:+2349042664096" class="btn btn--dark">Reserve a Table</a>
   </div>
 </section>
 
